@@ -1,28 +1,59 @@
 import { LightningElement, track } from 'lwc';
-const cities = ['New York', 'Los Angeles', 'Chicago', 'San Francisco'];
+const cities = [{ name: 'New York', id: 101 }, { name: 'Los Angeles', id: 102 }, { name: 'Chicago', id: 103 }, { name: 'San Francisco', id: 104 }];
 export default class CitiesSelector extends LightningElement {
-    @track selectedCity = ''
-    showDropdown = false;
-    city = ''
+    @track searchedCity = ''
+    showDropdown = false
+    selectedCity = ''
+    selectedIdx = -1
 
     get filteredCities() {
-        return cities.filter(city => city.toLowerCase().includes(this.selectedCity.toLowerCase()));
+        return cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()));
     }
 
     handleChange(event) {
-        this.selectedCity = event.target.value
-        this.showDropdown = true;
-
+        this.searchedCity = event.target.value
+        this.openDropdown()
     }
 
     selectCity(event) {
-        this.selectedCity = event.target.textContent;
-        this.showDropdown = false;
-        this.city = event.target.textContent
+        this.searchedCity = event.target.textContent
+        this.closeDropdown()
+        this.selectedCity = event.target.textContent
     }
 
-    changeDropdown() {
+    openDropdown() {
         this.showDropdown = true;
     }
 
+    closeDropdown() {
+        this.showDropdown = false
+        this.selectedIdx = -1
+    }
+
+    handelKeyPress(event) {
+        const liElements = this.template.querySelectorAll('li');
+        const key = event.keyCode
+
+        if (key === 13) {
+            this.selectedCity = cities[this.selectedIdx].name
+            this.searchedCity = cities[this.selectedIdx].name
+            this.closeDropdown()
+
+        } else if (key === 40 || key === 38) {
+            if (this.selectedIdx >= 0) {
+                const prevSelectedLi = this.template.querySelector(`[data-id="${cities[this.selectedIdx].id}"]`)
+                prevSelectedLi.classList.remove('selected-li')
+            }
+            if (key === 40) {
+                this.selectedIdx++
+                if (this.selectedIdx === liElements.length) this.selectedIdx--
+            } else if (key === 38) {
+                this.selectedIdx--
+                if (this.selectedIdx === -1) this.selectedIdx = 0
+            }
+
+            const selectedLi = this.template.querySelector(`[data-id="${cities[this.selectedIdx].id}"]`)
+            selectedLi.classList.add('selected-li')
+        }
+    }
 }

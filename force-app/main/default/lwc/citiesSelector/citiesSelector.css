@@ -4,6 +4,7 @@ li {
     padding: 5px;
 }
 
-li:hover {
+li:hover,
+.selected-li {
     background-color: rgb(113, 131, 146);
 }
