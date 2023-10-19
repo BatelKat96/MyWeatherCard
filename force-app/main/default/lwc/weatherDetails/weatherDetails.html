@@ -1,4 +1,18 @@
 <template>
-    <h1>Hello from weather details</h1>
+    <h2>Weather</h2>
+    <template lwc:if={weather}>
+        <div class="weather-details">
+            <h2>{weather.city}, {weather.country}</h2>
+            <h4>{weather.temp}C</h4>
+            <img src={weather.imgUrl} alt="" />
+            <p>{weather.desc}</p>
+            <p>Last updated: {weather.time}</p>
 
+        </div>
+    </template>
+    <template lwc:else>
+        <div>
+            <h3>Pick a City</h3>
+        </div>
+    </template>
 </template>
