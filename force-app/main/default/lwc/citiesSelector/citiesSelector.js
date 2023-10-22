@@ -1,5 +1,5 @@
 import { LightningElement, track, api } from 'lwc';
-const cities = [{ name: 'New York', id: 101 }, { name: 'Los Angeles', id: 102 }, { name: 'Chicago', id: 103 }, { name: 'San Francisco', id: 104 }];
+import { cities } from 'c/data';
 export default class CitiesSelector extends LightningElement {
     @track searchedCity = ''
     showDropdown = false

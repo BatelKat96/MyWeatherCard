@@ -8,3 +8,8 @@ li:hover,
 .selected-li {
     background-color: rgb(113, 131, 146);
 }
+
+ul {
+    max-height: 150px;
+    overflow-y: scroll;
+}
