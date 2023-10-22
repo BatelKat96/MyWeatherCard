@@ -1,10 +1,17 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 const cities = [{ name: 'New York', id: 101 }, { name: 'Los Angeles', id: 102 }, { name: 'Chicago', id: 103 }, { name: 'San Francisco', id: 104 }];
 export default class CitiesSelector extends LightningElement {
     @track searchedCity = ''
     showDropdown = false
     selectedCity = ''
     selectedIdx = -1
+
+    updateCity() {
+        const event = new CustomEvent('choosencity', {
+            detail: this.selectedCity
+        })
+        this.dispatchEvent(event);
+    }
 
     get filteredCities() {
         return cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()));
@@ -19,6 +26,7 @@ export default class CitiesSelector extends LightningElement {
         this.searchedCity = event.target.textContent
         this.closeDropdown()
         this.selectedCity = event.target.textContent
+        this.updateCity()
     }
 
     openDropdown() {
@@ -38,6 +46,7 @@ export default class CitiesSelector extends LightningElement {
             this.selectedCity = cities[this.selectedIdx].name
             this.searchedCity = cities[this.selectedIdx].name
             this.closeDropdown()
+            this.updateCity()
 
         } else if (key === 40 || key === 38) {
             if (this.selectedIdx >= 0) {
