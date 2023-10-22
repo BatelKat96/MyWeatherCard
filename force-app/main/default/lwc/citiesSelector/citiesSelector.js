@@ -14,7 +14,7 @@ export default class CitiesSelector extends LightningElement {
     }
 
     get filteredCities() {
-        return cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()));
+        return cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()))
     }
 
     handleChange(event) {
@@ -39,24 +39,24 @@ export default class CitiesSelector extends LightningElement {
     }
 
     handelKeyPress(event) {
-        const liElements = this.template.querySelectorAll('li');
-        const key = event.keyCode
+        const liElements = this.template.querySelectorAll('li')
+        const key = event.key
 
-        if (key === 13) {
+        if (key === 'Enter') {
             this.selectedCity = cities[this.selectedIdx].name
             this.searchedCity = cities[this.selectedIdx].name
             this.closeDropdown()
             this.updateCity()
 
-        } else if (key === 40 || key === 38) {
+        } else if (key === 'ArrowDown' || key === 'ArrowUp') {
             if (this.selectedIdx >= 0) {
                 const prevSelectedLi = this.template.querySelector(`[data-id="${cities[this.selectedIdx].id}"]`)
                 prevSelectedLi.classList.remove('selected-li')
             }
-            if (key === 40) {
+            if (key === 'ArrowDown') {
                 this.selectedIdx++
                 if (this.selectedIdx === liElements.length) this.selectedIdx--
-            } else if (key === 38) {
+            } else if (key === 'ArrowUp') {
                 this.selectedIdx--
                 if (this.selectedIdx === -1) this.selectedIdx = 0
             }
