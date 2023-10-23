@@ -5,8 +5,12 @@ export default class WeatherDetails extends LightningElement {
     @track weather
     apiKey
     _city
-    error
-    @track msg = 'Pick a city to see the weather'
+    @track msg = 'Search for a city to see the weather'
+
+    connectedCallback() {
+        this._city = 'Tel Aviv'
+        this.getWeather()
+    }
 
     @api get choosencity() {
         return this._city;
@@ -23,7 +27,7 @@ export default class WeatherDetails extends LightningElement {
         if (data) {
             this.apiKey = data
         } else if (error) {
-            this.weather = 'Can\'t get weather try to refresh'
+            this.weather = 'Can\'t get weather, try to refresh'
         }
     }
 
@@ -31,7 +35,6 @@ export default class WeatherDetails extends LightningElement {
         if (!this._city) return
 
         const weathers = this._loadFromStorage()
-
         if (weathers[this._city]) {
             this.weather = weathers[this._city]
         } else {
@@ -52,7 +55,7 @@ export default class WeatherDetails extends LightningElement {
                 this._saveToStorage(weathers)
                 this.weather = weatherInfo
             } catch (err) {
-                this.msg = 'Can\'t get weather try to refresh'
+                this.msg = 'Can\'t get weather, try to refresh'
             }
         }
     }
