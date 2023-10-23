@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <lightning-input label="Choose a city" type="search" onchange={handleChange} value={searchedCity}
-            onfocus={openDropdown} onkeydown={handelKeyPress}></lightning-input>
-        <div if:true={showDropdown}>
+    <div class="cities-selector-container">
+        <lightning-input class="cities-input" placeholder="Search city" variant="label-hidden" type="search"
+            onchange={handleChange} value={searchedCity} onfocus={openDropdown}
+            onkeydown={handelKeyPress}></lightning-input>
+        <div class="ul-cities-container" if:true={showDropdown}>
             <ul>
                 <template for:each={filteredCities} for:item="city">
                     <li key={city.id} data-id={city.id} onclick={selectCity}>{city.name}</li>

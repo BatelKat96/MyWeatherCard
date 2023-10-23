@@ -1,7 +1,46 @@
 .weather-details {
-    width: 1000px;
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: rgb(18, 18, 69);
+    color: whitesmoke;
+    border-radius: 3px;
+    padding: 40px;
+    margin-block-start: 20px;
+    text-align: center;
+}
+
+.weather-details h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.weather-details h4 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.weather-details img {
+    width: 100px;
+    margin-block-start: 10px;
+}
+
+.weather-desc {
+    font-size: 1.5rem;
 }
 
 .city-time {
     font-size: 1.2rem;
+}
+
+.local-time {
+    margin-block-start: 10px;
+    font-style: italic;
+}
+
+.weather-msg {
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 1.02rem;
+    text-align: center;
+    margin-block-start: 20px;
 }

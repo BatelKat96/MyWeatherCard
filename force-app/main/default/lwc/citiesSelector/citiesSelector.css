@@ -1,15 +1,26 @@
+.cities-selector-container {
+    max-width: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.ul-cities-container ul {
+    max-height: 148px;
+    overflow-y: auto;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
 li {
     background-color: rgb(240, 248, 255);
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 33px;
 }
 
 li:hover,
 .selected-li {
     background-color: rgb(113, 131, 146);
-}
-
-ul {
-    max-height: 150px;
-    overflow-y: auto;
 }

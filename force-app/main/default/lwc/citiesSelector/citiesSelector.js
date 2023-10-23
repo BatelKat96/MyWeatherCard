@@ -1,10 +1,11 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { cities } from 'c/data';
 export default class CitiesSelector extends LightningElement {
     @track searchedCity = ''
     showDropdown = false
     selectedCity = ''
     selectedIdx = -1
+
 
     updateCity() {
         const event = new CustomEvent('choosencity', {
