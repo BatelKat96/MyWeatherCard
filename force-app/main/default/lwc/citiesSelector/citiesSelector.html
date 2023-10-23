@@ -1,9 +1,5 @@
 <template>
-    <h1>Hello from cities selector</h1>
-
-    <p>city: {selectedCity}</p>
     <div>
-
         <lightning-input label="Choose a city" type="search" onchange={handleChange} value={searchedCity}
             onfocus={openDropdown} onkeydown={handelKeyPress}></lightning-input>
         <div if:true={showDropdown}>
@@ -14,7 +10,4 @@
             </ul>
         </div>
     </div>
-
-
-
 </template>
