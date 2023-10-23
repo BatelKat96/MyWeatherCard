@@ -5,20 +5,17 @@ export default class WeatherDetails extends LightningElement {
 
     @track weather
     apiKey
-    @track city
     _city
     error
-    @track msg = 'Pick a city'
+    @track msg = 'Pick a city to see the weather'
 
 
     @api get choosencity() {
-
         return this._city;
     }
 
     set choosencity(val) {
         this._city = val
-        this.city = val
         this.getWeather()
     }
 
@@ -33,15 +30,16 @@ export default class WeatherDetails extends LightningElement {
     }
 
     async getWeather() {
-        if (!this.city) return
+        if (!this._city) return
         try {
-            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${this.apiKey}&q=${this.city}&aqi=yes`);
+            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${this.apiKey}&q=${this._city}&aqi=yes`);
             const data = await response.json();
             const { current, location } = data
             const weatherInfo = {
                 city: location.name,
                 country: location.country,
-                time: Date.now(),
+                lastUpdate: Date.now(),
+                time: this.convertTime(location.localtime),
                 temp: current.temp_c,
                 imgUrl: current.condition.icon,
                 desc: current.condition.text,
@@ -49,9 +47,15 @@ export default class WeatherDetails extends LightningElement {
             this.weather = weatherInfo
         } catch (err) {
             this.msg = 'Can\'t get weather try to refresh'
-
         }
     }
 
+    convertTime(localTime) {
+        const time = localTime.slice(11)
+        let date = localTime.slice(0, 10)
+        date = date.replaceAll('-', '.')
+        date = date.split('.').reverse().join('.')
 
+        return `${time}, ${date}`
+    }
 }

@@ -3,16 +3,20 @@
     <template lwc:if={weather}>
         <div class="weather-details">
             <h2>{weather.city}, {weather.country}</h2>
-            <h4>{weather.temp}C</h4>
+            <h4>{weather.temp}° C</h4>
             <img src={weather.imgUrl} alt="" />
             <p>{weather.desc}</p>
-            <p>Last updated: {weather.time}</p>
-
+            <p class="city-time"> {weather.time} </p>
+            <p class="local-time">Your time: <lightning-formatted-date-time value={weather.lastUpdate} hour="2-digit"
+                    minute="2-digit"></lightning-formatted-date-time>, <lightning-formatted-date-time
+                    value={weather.lastUpdate} year="numeric" month="numeric"
+                    day="numeric"></lightning-formatted-date-time>
+            </p>
         </div>
     </template>
     <template lwc:else>
         <div>
-            <h3>Pick a City</h3>
+            <h3>{msg}</h3>
         </div>
     </template>
 </template>
