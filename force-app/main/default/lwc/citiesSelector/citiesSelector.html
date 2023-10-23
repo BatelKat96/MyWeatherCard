@@ -2,7 +2,7 @@
     <div class="cities-selector-container">
         <lightning-input class="cities-input" placeholder="Search city" variant="label-hidden" type="search"
             onchange={handleChange} value={searchedCity} onfocus={openDropdown}
-            onkeydown={handelKeyPress}></lightning-input>
+            onkeyup={handleKeyPress}></lightning-input>
         <div class="ul-cities-container" if:true={showDropdown}>
             <ul>
                 <template for:each={filteredCities} for:item="city">

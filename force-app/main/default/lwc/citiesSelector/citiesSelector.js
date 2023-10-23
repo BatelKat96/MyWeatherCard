@@ -5,7 +5,7 @@ export default class CitiesSelector extends LightningElement {
     showDropdown = false
     selectedCity = ''
     selectedIdx = -1
-
+    citiesFiltered
 
     updateCity() {
         const event = new CustomEvent('choosencity', {
@@ -15,11 +15,13 @@ export default class CitiesSelector extends LightningElement {
     }
 
     get filteredCities() {
-        return cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()))
+        this.citiesFiltered = cities.filter(city => city.name.toLowerCase().includes(this.searchedCity.toLowerCase()))
+        return this.citiesFiltered
     }
 
     handleChange(event) {
         this.searchedCity = event.target.value
+        this.selectedIdx = -1
         this.openDropdown()
     }
 
@@ -39,19 +41,21 @@ export default class CitiesSelector extends LightningElement {
         this.selectedIdx = -1
     }
 
-    handelKeyPress(event) {
-        const liElements = this.template.querySelectorAll('li')
+    handleKeyPress(event) {
         const key = event.key
 
+        if (!this.searchedCity && key === 'Backspace') this.selectedIdx = -1
+
+        const liElements = this.template.querySelectorAll('li')
         if (key === 'Enter') {
-            this.selectedCity = cities[this.selectedIdx].name
-            this.searchedCity = cities[this.selectedIdx].name
+            this.selectedCity = this.citiesFiltered[this.selectedIdx].name
+            this.searchedCity = this.citiesFiltered[this.selectedIdx].name
             this.closeDropdown()
             this.updateCity()
 
         } else if (key === 'ArrowDown' || key === 'ArrowUp') {
             if (this.selectedIdx >= 0) {
-                const prevSelectedLi = this.template.querySelector(`[data-id="${cities[this.selectedIdx].id}"]`)
+                const prevSelectedLi = this.template.querySelector(`[data-id="${this.citiesFiltered[this.selectedIdx].id}"]`)
                 prevSelectedLi.classList.remove('selected-li')
             }
             if (key === 'ArrowDown') {
@@ -62,7 +66,7 @@ export default class CitiesSelector extends LightningElement {
                 if (this.selectedIdx === -1) this.selectedIdx = 0
             }
 
-            const selectedLi = this.template.querySelector(`[data-id="${cities[this.selectedIdx].id}"]`)
+            const selectedLi = this.template.querySelector(`[data-id="${this.citiesFiltered[this.selectedIdx].id}"]`)
             selectedLi.classList.add('selected-li')
         }
     }
