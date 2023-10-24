@@ -3,7 +3,7 @@
 A Lightning Web Component (LWC) project that allows users to select a city using autocomplete and dropdown functionality. After choosing a city, the project makes an API call to retrieve weather data for the selected city and displays it in another Lightning Web Component.
 
 
-![App flow](https://res.cloudinary.com/djyjaumko/video/upload/v1698126985/%D7%94%D7%A7%D7%9C%D7%98%D7%94_2023-10-24_024221_pfd11a.mp4)
+![App flow](https://res.cloudinary.com/djyjaumko/image/upload/v1698129079/XXX_uhqqfg.gif)
 ## Table of Contents
 
 - [City Weather LWC Project](#city-weather-lwc-project)
