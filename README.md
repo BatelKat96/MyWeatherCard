@@ -1,18 +1,36 @@
-# Salesforce DX Project: Next Steps
+# City Weather LWC Project
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A Lightning Web Component (LWC) project that allows users to select a city using autocomplete and dropdown functionality. After choosing a city, the project makes an API call to retrieve weather data for the selected city and displays it in another Lightning Web Component.
 
-## How Do You Plan to Deploy Your Changes?
+## Table of Contents
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- [City Weather LWC Project](#city-weather-lwc-project)
+  - [Description](#description)
+  - [Components](#components)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-## Configure Your Salesforce DX Project
+## Description
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+This project is built using Lightning Web Components (LWC) in Salesforce, and it consists of two main components:
 
-## Read All About It
+1. **City Selection Component**: This component provides an input field with autocomplete and a dropdown list for selecting a city. Once the user chooses a city, an API call is triggered to fetch weather data for the selected city.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+2. **Weather Display Component**: This component receives the weather data from the City Selection Component and renders the weather information for the selected city.
+
+## Components
+
+The project includes two LWC components:
+
+- `citySelection`: Handles city selection and initiates weather data retrieval.
+- `weatherDisplay`: Displays the weather information for the selected city.
+
+## Features
+
+- Autocomplete and dropdown city selection.
+- Real-time weather data retrieval from an API.
+- Weather information display in a user-friendly format.
